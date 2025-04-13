@@ -1,0 +1,8 @@
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Collecting PyQt5
+  Using cached PyQt5-5.15.11.tar.gz (3.2 MB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
