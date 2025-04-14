@@ -49,7 +49,8 @@ def read_data_from_file(file_path):
                 next(reader)  # Skip the header row
                 return [(datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S'), float(row[1]), float(row[2]), float(row[3]), float(row[4])) for row in reader]
     except Exception as e:
-        print(f"Error reading from file: {e}")
+        pass
+        # print(f"Error reading from file: {e}")
     return []
 
 def write_data_to_file(file_path, data):
@@ -61,9 +62,10 @@ def write_data_to_file(file_path, data):
                 writer.writerow(['Timestamp', 'Battery Voltage (V)', 'Solar Voltage (V)', 'Ultrasonic Range', 'RSSI'])
             for row in data:
                 writer.writerow(row)
-        print(f"Data written to {file_path}")
+        # print(f"Data written to {file_path}")
     except Exception as e:
-        print(f"Error writing to file: {e}")
+        pass
+        # print(f"Error writing to file: {e}")
 
 def parse_message(message):
     """Extract field values from the incoming message."""
@@ -103,12 +105,12 @@ class SerialReaderThread(QThread):
     def run(self):
         ser = serial.Serial(self.serial_port, self.baudrate, timeout=1)
         data = read_data_from_file(data_file)
-        print(f"Initial data loaded from {data_file}: {data}")
+        # print(f"Initial data loaded from {data_file}: {data}")
 
         while self.running:
             if ser.in_waiting > 0:
                 line = ser.readline()
-                print(line)  # Print the raw line for debugging
+                # print(line)  # Print the raw line for debugging
                 decoded_line = line.decode('utf-8', errors='ignore').strip()
                 self.message_received.emit(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " :: " + decoded_line)
                 if len(decoded_line) < 10 or decoded_line[0] != 'S' or len(decoded_line) > 40:
@@ -118,7 +120,7 @@ class SerialReaderThread(QThread):
                 solar = parsed_data.get('solar_voltage')
                 ultrasonic = parsed_data.get('ultrasonic_range')
                 rssi = parsed_data.get('rssi')
-                print(f"{datetime.now()}  Battery={battery}, Solar={solar}, Ultrasonic={ultrasonic}, RSSI={rssi}")  # Print parsed values for debugging
+                # print(f"{datetime.now()}  Battery={battery}, Solar={solar}, Ultrasonic={ultrasonic}, RSSI={rssi}")  # Print parsed values for debugging
                 if battery is not None and solar is not None and ultrasonic is not None and rssi is not None:
                     timestamp = datetime.now()
                     data.append((timestamp, battery, solar, ultrasonic, rssi))
@@ -162,7 +164,7 @@ class MainWindow(QMainWindow):
         button_group = QHBoxLayout()
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self.start_reading)
-        self.stop_button.setEnabled(False)
+        self.start_button.setEnabled(False)
         button_group.addWidget(self.start_button)
 
         self.stop_button = QPushButton("Stop")
@@ -204,6 +206,7 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
+        self.start_reading()
 
     def get_serial_ports(self):
         # ports = [port.device for port in list_ports.comports() if port.device.startswith('/dev/cu.usbserial')]
@@ -228,15 +231,16 @@ class MainWindow(QMainWindow):
     def delete_data(self):
         if os.path.exists(data_file):
             os.remove(data_file)
-            print(f"Deleted {data_file}")
+            # print(f"Deleted {data_file}")
         else:
-            print(f"{data_file} does not exist")
+            pass
+            # print(f"{data_file} does not exist")
 
     def display_message(self, message):
         self.message_display.append(message)
 
     def update_plot_data(self, data):
-        print("Data updated:", data[-1])  # Debug print
+        # print("Data updated:", data[-1])  # Debug print
         self.data = data
         self.update_plot()
 
@@ -244,7 +248,7 @@ class MainWindow(QMainWindow):
         if not hasattr(self, 'data') or not self.data:
             return
 
-        print("Updating plot with data:", self.data[-1])  # Debug print
+        # print("Updating plot with data:", self.data[-1])  # Debug print
 
         data = self.data[-20000:]  # Limit data to the last 10000 points
 
