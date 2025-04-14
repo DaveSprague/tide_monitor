@@ -1,15 +1,18 @@
 [Unit]
-Description=TidePlottingApp
+Description=TidePlotter
 After=network.target
 
 [Service]
 ExecStartPre=/bin/sleep 30
-ExecStart=/usr/bin/python3 -u TidePlottingApp.py
+ExecStart=/usr/bin/python3 -u TidePlotter.py
 WorkingDirectory=/home/tide/tide_monitor
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
 User=tide
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
 
 [Install]
 WantedBy=multi-user.target

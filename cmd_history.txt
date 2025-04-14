@@ -1,0 +1,52 @@
+    1  git --version
+    2  pip --version
+    3  python -m pip install --upgrade
+    4  history
+    5  sudo apt install python3-pip3
+    6  sudo apt install python3-pip
+    7  sudo apt autoremove
+    8  sudo systemctl disable TidePlottingApp
+    9  sudo systemctl stop  TidePlottingApp
+   10  cd tide*
+   11  more *.service
+   12  sudo systemctl stop TidePlottingApp
+   13  sudo systemctl list
+   14  sudo systemctl
+   15  sudo systemctl stop TideMonitor
+   16  cd /etc
+   17  ls
+   18  cd system*
+   19  cd systemd
+   20  sudo cd systemd
+   21  ls
+   22  cd user
+   23  ls
+   24  cd ..
+   25  cd system
+   26  ls
+   27  more TideMonitor.service
+   28  cd tide*
+   29  nano *.service
+   30  ls
+   31  /bin/python /home/tide/tide_monitor/TidePlotter.py
+   32  history
+   33  sudo cp TidePlotter.service /etc/systemd/system/
+   34  cd /etc/systemd/system
+   35  ls
+   36  sudo rm TideMonitor.service
+   37  sudo systemctl daemon-reload
+   38  sudo systemctl enable TidePlotter.service
+   39  sudo systemctl start TidePlotter.service
+   40  history
+   41  sudo systemctl stop TidePlotter.service
+   42  history > command_history.txt
+   43  cd ~
+   44  cd tide*
+   45  ls
+   46  history > cmd_history.txt
+   47  more cmd*
+   48  sudo cp TidePlotter.service /etc/systemd/system/
+   49  sudo systemctl daemon-reload
+   50  sudo systemctl start TidePlotter.service
+   51  sudo systemctl stop TidePlotter.service
+   52  history > cmd_history.txt

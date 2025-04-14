@@ -138,7 +138,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         matplotlib.use('Qt5Agg')
 
-        self.setWindowTitle("Serial Data Plotter")
+        self.setWindowTitle("Tide Plotter")
         self.setGeometry(100, 100, 2000, 1200)
 
         self.serial_reader_thread = None
@@ -206,6 +206,10 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
+
+        # Start maximized
+        self.showMaximized()
+
         self.start_reading()
 
     def get_serial_ports(self):
