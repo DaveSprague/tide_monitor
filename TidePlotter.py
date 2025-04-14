@@ -162,11 +162,12 @@ class MainWindow(QMainWindow):
         button_group = QHBoxLayout()
         self.start_button = QPushButton("Start")
         self.start_button.clicked.connect(self.start_reading)
+        self.stop_button.setEnabled(False)
         button_group.addWidget(self.start_button)
 
         self.stop_button = QPushButton("Stop")
         self.stop_button.clicked.connect(self.stop_reading)
-        self.stop_button.setEnabled(False)
+        self.stop_button.setEnabled(True)
         button_group.addWidget(self.stop_button)
 
         # Add delete button
