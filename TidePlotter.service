@@ -5,7 +5,7 @@ After=network.target
 [Service]
 ExecStartPre=/bin/sleep 30
 ExecStart=/usr/bin/python3 -u TidePlotter.py
-WorkingDirectory=/home/tide/tide_monitor
+WorkingDirectory=/home/tide_monitor
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
